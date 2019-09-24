@@ -188,12 +188,19 @@ uint32_t SDcardCountFiles(SDcardFile_HandleTypeDef * scfhtd, const TCHAR * path,
 {
 	uint32_t count = 0;
 	FRESULT fr;
+	//TCHAR symbols[] = "ss0000.txt";
 	fr = f_findfirst(&scfhtd->trgDir, &scfhtd->curFileInfo, path, pattern);  /* Start to search for photo files */
 
 	    while (fr == FR_OK && scfhtd->curFileInfo.fname[0]) {         /* Repeat while an item is found */
+//	while(fr == FR_OK){
 	        //printf("%s\n", scfhtd->curFileInfo.fname);                /* Display the object name */
 	        fr = f_findnext(&scfhtd->trgDir, &scfhtd->curFileInfo);               /* Search for next item */
 	        count++;
 	    }
+//	if(fr == FR_OK)
+//		count = 1;
+	fr = f_stat( pattern, &scfhtd->curFileInfo);
+	if(fr == FR_OK)
+		count = 1;
 	return count;
 }
