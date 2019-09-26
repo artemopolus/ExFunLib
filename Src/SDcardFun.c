@@ -56,6 +56,7 @@ SDcardFileStatus_Typedef SDcardOpenFile2write(SDcardFile_HandleTypeDef * scfhtd,
 	if((res == FR_INVALID_NAME)||(res == FR_NO_PATH)) return SDcard_InputInvalid;
 	else return SDcard_FileNotOpened;
 }
+
 SDcardFileStatus_Typedef SDcardOpenFile2read(SDcardFile_HandleTypeDef * scfhtd, const TCHAR * path)
 {
 	if((scfhtd->fileIsOpened == SDcard_FileOpen2write)||(scfhtd->fileIsOpened == SDcard_FileOpen2read)){
@@ -74,6 +75,14 @@ SDcardFileStatus_Typedef SDcardWrite2file(SDcardFile_HandleTypeDef * scfhtd, con
 {
 	if(scfhtd->fileIsOpened == SDcard_FileNotOpened) return SDcard_FileNotOpened;
 	uint8_t res = f_write(&scfhtd->trgFile, msg,msglen, (void *)&getmsglen);
+	if(res == FR_OK)	return SDcard_success;
+	else return SDcard_error;
+}
+SDcardFileStatus_Typedef SDcardWrite2fileln(SDcardFile_HandleTypeDef * scfhtd, const uint8_t * msg, const UINT msglen, UINT * getmsglen)
+{
+	if(scfhtd->fileIsOpened == SDcard_FileNotOpened) return SDcard_FileNotOpened;
+	uint8_t res = f_write(&scfhtd->trgFile, msg,msglen, (void *)&getmsglen);
+	res = f_write(&scfhtd->trgFile, "\n",1, (void *)&getmsglen);
 	if(res == FR_OK)	return SDcard_success;
 	else return SDcard_error;
 }

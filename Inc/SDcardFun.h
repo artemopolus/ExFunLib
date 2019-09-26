@@ -42,6 +42,7 @@ SDcardFileStatus_Typedef SDcardTryOpen(SDcardFile_HandleTypeDef * scfhtd, const 
 SDcardFileStatus_Typedef SDcardOpenFile2write(SDcardFile_HandleTypeDef * scfhtd, const TCHAR * path);
 SDcardFileStatus_Typedef SDcardOpenFile2read(SDcardFile_HandleTypeDef * scfhtd, const TCHAR * path);
 SDcardFileStatus_Typedef SDcardWrite2file(SDcardFile_HandleTypeDef * scfhtd, const uint8_t * msg, const UINT msglen, UINT * getmsglen);
+SDcardFileStatus_Typedef SDcardWrite2fileln(SDcardFile_HandleTypeDef * scfhtd, const uint8_t * msg, const UINT msglen, UINT * getmsglen);
 SDcardFileStatus_Typedef SDcardReadFile(SDcardFile_HandleTypeDef * scfhtd, uint8_t * msg, UINT msglen, UINT * getmsglen);
 SDcardFileStatus_Typedef SDcardCloseFile(SDcardFile_HandleTypeDef * scfhtd);
 SDcardFileStatus_Typedef SDcardSelfTest(SDcardFile_HandleTypeDef * scfhtd);
